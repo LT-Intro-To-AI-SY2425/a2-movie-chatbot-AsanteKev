@@ -23,7 +23,6 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
     # the index is != to the length of the list)
     while pind < len(pattern) or sind < len(source):
         # your job is to fill out the body of this loop
-        
 
         # 1) if we reached the end of the pattern but not source
         if pind == len(pattern) and  sind < len(source):
@@ -33,16 +32,24 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
         # If you get stuck on this one, we encourage you to attempt the other conditions
         #   and come back to this one afterwards
         elif pattern[pind] == '%':
-            if pind + 1 == len(pattern):
-                combined = ' '.join(source[sind:])
-                result.append(combined)
+            if pind == len(pattern) - 1:
+                res = ' '.join(source[sind:])
+                result.append(res)
                 return result
             else:
-                return None # placeholder, fix later
+                pind += 1
+                accum = ""
+                while pattern[pind] != source[sind]:
+                    accum += source[sind] + ""
+                    sind += 1
+            if sind == len(source):
+                    return None
+            result.append(accum.rstrip())
             
         # 3) if we reached the end of the source but not the pattern
-        elif sind == len(source) and pind < len(pattern):
+        elif sind == len(source):
             return None
+        
         # 4) if the current thing in the pattern is an _
         elif pattern[pind] == '_':
             result.append(source[sind])
@@ -51,9 +58,10 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
 
         # 5) if the current thing in the pattern is the same as the current thing in the
         # source
-        elif source[sind] == pattern[pind]:
+        elif pattern[pind] == source[sind]:
             pind += 1
             sind += 1
+
         # 6) else : this will happen if none of the other conditions are met it
         # indicates the current thing it pattern doesn't match the current thing in
         # source
