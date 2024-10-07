@@ -12,9 +12,10 @@ This assignment is about learning and applying the while loop and iterating thro
 
 ## Reflection Questions
 1. What was difficult for you while completing the match function?
-
+Knowing when to use an elif & if statement
 
 
 2. Explain how you could use the match function for extracting information from a movie database.
+It oculd be used to find movies related to ones that you've liked in the past.
 
 
